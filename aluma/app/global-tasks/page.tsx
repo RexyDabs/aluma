@@ -4,6 +4,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { getCurrentUser } from "../../lib/auth";
 import type { User } from "../../lib/auth";
 import MobileTaskInterface from "../../components/MobileTaskInterface";
+import EnhancedMobileTaskInterface from "../../components/EnhancedMobileTaskInterface";
 import { supabase } from "../../lib/supabase";
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
@@ -285,7 +286,7 @@ export default function GlobalTasksPage() {
             </Button>
           )}
         </div>
-        <MobileTaskInterface />
+        <EnhancedMobileTaskInterface />
       </div>
     );
   }
