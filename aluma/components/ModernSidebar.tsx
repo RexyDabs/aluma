@@ -167,7 +167,7 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
           <div className="flex items-center space-x-3">
             <div className="flex-shrink-0">
               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
-                <UserIcon className="h-4 w-4 text-white" />
+                <AvatarIcon className="h-4 w-4 text-white" />
               </div>
             </div>
             {!sidebarCollapsed && (
