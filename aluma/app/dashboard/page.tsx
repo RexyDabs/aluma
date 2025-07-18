@@ -375,6 +375,20 @@ export default function DashboardPage() {
         </p>
       </div>
 
+      {/* Quick Actions Bar */}
+      <div className="flex items-center gap-3">
+        <Button
+          onClick={() => setShowQuickTaskModal(true)}
+          className="bg-blue-600 hover:bg-blue-700"
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Quick Task
+        </Button>
+        <Button variant="outline" onClick={() => router.push("/global-tasks")}>
+          View All Tasks
+        </Button>
+      </div>
+
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {getKPIs().map((kpi, index) => (
