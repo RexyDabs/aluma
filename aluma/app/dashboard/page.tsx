@@ -17,20 +17,20 @@ import {
   AlertsWidget,
   ScheduleWidget,
 } from "../../components/DashboardWidgets";
+import { Plus } from "lucide-react";
 import {
-  Users,
-  CheckCircle,
-  Clock,
-  DollarSign,
-  Target,
-  Wrench,
-  Plus,
-  Calendar,
-  FileText,
-  TrendingUp,
-  UserPlus,
-  ClipboardList,
-} from "lucide-react";
+  PersonIcon,
+  CheckCircledIcon,
+  ClockIcon,
+  DollarSignIcon,
+  TargetIcon,
+  GearIcon,
+  CalendarIcon,
+  FileTextIcon,
+  TrendingUpIcon,
+  PlusCircledIcon,
+  ClipboardIcon,
+} from "@radix-ui/react-icons";
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
