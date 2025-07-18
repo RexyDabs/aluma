@@ -13,15 +13,14 @@ import {
   TargetIcon,
   GearIcon,
   CheckboxIcon,
-  StopwatchIcon,
   FileTextIcon,
   PersonIcon,
   ExitIcon,
   GearIcon as SettingsIcon,
   BellIcon,
-  MagnifyingGlassIcon,
   AvatarIcon,
 } from "@radix-ui/react-icons";
+import { Clock, Search } from "lucide-react";
 
 interface NavigationItem {
   label: string;
