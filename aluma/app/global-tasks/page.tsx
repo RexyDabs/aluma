@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { getCurrentUser } from "../../lib/auth";
 import type { User } from "../../lib/auth";
 import MobileTaskInterface from "../../components/MobileTaskInterface";
