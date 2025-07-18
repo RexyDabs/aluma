@@ -359,6 +359,13 @@ export default function DashboardPage() {
         color: "from-purple-500 to-purple-600",
       },
       {
+        title: "Analytics",
+        description: "View business insights",
+        icon: <TrendingUp className="h-5 w-5" />,
+        onClick: () => router.push("/analytics"),
+        color: "from-indigo-500 to-indigo-600",
+      },
+      {
         title: "Generate Report",
         description: "Create performance report",
         icon: <FileTextIcon className="h-5 w-5" />,
