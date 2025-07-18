@@ -17,6 +17,8 @@ import {
   AlertsWidget,
   ScheduleWidget,
 } from "../../components/DashboardWidgets";
+import QuickTaskForm from "../../components/QuickTaskForm";
+import { Button } from "../../components/ui/button";
 import { Plus, TrendingUp } from "lucide-react";
 import {
   PersonIcon,
@@ -36,6 +38,7 @@ export default function DashboardPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userPermissions, setUserPermissions] = useState<any>(null);
   const [dashboardData, setDashboardData] = useState<any>({});
+  const [showQuickTaskModal, setShowQuickTaskModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -56,6 +59,12 @@ export default function DashboardPage() {
 
     initializeDashboard();
   }, []);
+
+  function handleTaskCreated(taskId: string) {
+    // Optionally refresh dashboard data or show success message
+    console.log("Task created with ID:", taskId);
+    // Could add a toast notification here
+  }
 
   async function fetchDashboardData(user: User, permissions: any) {
     try {
@@ -305,6 +314,13 @@ export default function DashboardPage() {
           color: "from-blue-500 to-blue-600",
         },
         {
+          title: "Quick Task",
+          description: "Create a new task quickly",
+          icon: <Plus className="h-5 w-5" />,
+          onClick: () => setShowQuickTaskModal(true),
+          color: "from-emerald-500 to-emerald-600",
+        },
+        {
           title: "Report Issue",
           description: "Log a problem or delay",
           icon: <FileTextIcon className="h-5 w-5" />,
@@ -344,6 +360,13 @@ export default function DashboardPage() {
         color: "from-purple-500 to-purple-600",
       },
       {
+        title: "Analytics",
+        description: "View business insights",
+        icon: <TrendingUp className="h-5 w-5" />,
+        onClick: () => router.push("/analytics"),
+        color: "from-indigo-500 to-indigo-600",
+      },
+      {
         title: "Generate Report",
         description: "Create performance report",
         icon: <FileTextIcon className="h-5 w-5" />,
@@ -365,6 +388,20 @@ export default function DashboardPage() {
             ? "Ready to tackle today's tasks? Here's your field overview."
             : "Here's what's happening with your business today."}
         </p>
+      </div>
+
+      {/* Quick Actions Bar */}
+      <div className="flex items-center gap-3">
+        <Button
+          onClick={() => setShowQuickTaskModal(true)}
+          className="bg-blue-600 hover:bg-blue-700"
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          Quick Task
+        </Button>
+        <Button variant="outline" onClick={() => router.push("/global-tasks")}>
+          View All Tasks
+        </Button>
       </div>
 
       {/* KPI Cards */}
@@ -415,6 +452,13 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
+
+      {/* Quick Task Creation Modal */}
+      <QuickTaskForm
+        isOpen={showQuickTaskModal}
+        onClose={() => setShowQuickTaskModal(false)}
+        onTaskCreated={handleTaskCreated}
+      />
     </div>
   );
 }

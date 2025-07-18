@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { getCurrentUser } from "../../lib/auth";
 import type { User } from "../../lib/auth";
 import MobileTaskInterface from "../../components/MobileTaskInterface";
+import EnhancedMobileTaskInterface from "../../components/EnhancedMobileTaskInterface";
 import { supabase } from "../../lib/supabase";
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
@@ -64,7 +65,7 @@ interface TaskTag {
 }
 
 const statusOptions = [
-  { label: "All", value: "" },
+  { label: "All", value: "all-statuses" },
   { label: "To Do", value: "todo" },
   { label: "In Progress", value: "in_progress" },
   { label: "Done", value: "done" },
@@ -79,10 +80,10 @@ export default function GlobalTasksPage() {
   const [categories, setCategories] = useState<TaskCategory[]>([]);
   const [tags, setTags] = useState<TaskTag[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [statusFilter, setStatusFilter] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all-statuses");
+  const [categoryFilter, setCategoryFilter] = useState("all-categories");
   const [tagFilter, setTagFilter] = useState<string[]>([]);
-  const [dueFilter, setDueFilter] = useState("");
+  const [dueFilter, setDueFilter] = useState("all-due-dates");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showQuickCreateModal, setShowQuickCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -192,6 +193,81 @@ export default function GlobalTasksPage() {
     currentUser.role,
   );
 
+  // Filter tasks based on current filter states
+  const filteredTasks = useMemo(() => {
+    return tasks.filter((task) => {
+      // Status filter
+      if (
+        statusFilter &&
+        statusFilter !== "all-statuses" &&
+        task.status !== statusFilter
+      ) {
+        return false;
+      }
+
+      // Category filter
+      if (categoryFilter && categoryFilter !== "all-categories") {
+        if (!task.category || task.category.id !== categoryFilter) {
+          return false;
+        }
+      }
+
+      // Due date filter
+      if (dueFilter && dueFilter !== "all-due-dates") {
+        const today = new Date();
+        const taskDueDate = task.due_date ? new Date(task.due_date) : null;
+
+        switch (dueFilter) {
+          case "overdue":
+            if (!taskDueDate || taskDueDate >= today) return false;
+            break;
+          case "today":
+            if (
+              !taskDueDate ||
+              taskDueDate.toDateString() !== today.toDateString()
+            )
+              return false;
+            break;
+          case "this_week":
+            const weekStart = new Date(today);
+            weekStart.setDate(today.getDate() - today.getDay());
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekStart.getDate() + 6);
+            if (
+              !taskDueDate ||
+              taskDueDate < weekStart ||
+              taskDueDate > weekEnd
+            )
+              return false;
+            break;
+          case "next_week":
+            const nextWeekStart = new Date(today);
+            nextWeekStart.setDate(today.getDate() + (7 - today.getDay()));
+            const nextWeekEnd = new Date(nextWeekStart);
+            nextWeekEnd.setDate(nextWeekStart.getDate() + 6);
+            if (
+              !taskDueDate ||
+              taskDueDate < nextWeekStart ||
+              taskDueDate > nextWeekEnd
+            )
+              return false;
+            break;
+        }
+      }
+
+      // Tag filter (if any tags are selected)
+      if (tagFilter.length > 0) {
+        const taskTagIds = task.tags?.map((tag) => tag.id) || [];
+        const hasMatchingTag = tagFilter.some((filterTagId) =>
+          taskTagIds.includes(filterTagId),
+        );
+        if (!hasMatchingTag) return false;
+      }
+
+      return true;
+    });
+  }, [tasks, statusFilter, categoryFilter, dueFilter, tagFilter]);
+
   // Mobile view for field workers
   if (viewMode === "mobile" || isFieldWorker) {
     return (
@@ -210,7 +286,7 @@ export default function GlobalTasksPage() {
             </Button>
           )}
         </div>
-        <MobileTaskInterface />
+        <EnhancedMobileTaskInterface />
       </div>
     );
   }
@@ -274,7 +350,7 @@ export default function GlobalTasksPage() {
               <SelectValue placeholder="Filter by category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all-categories">All Categories</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}
@@ -288,7 +364,7 @@ export default function GlobalTasksPage() {
               <SelectValue placeholder="Filter by due date" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Due Dates</SelectItem>
+              <SelectItem value="all-due-dates">All Due Dates</SelectItem>
               <SelectItem value="overdue">Overdue</SelectItem>
               <SelectItem value="today">Due Today</SelectItem>
               <SelectItem value="this_week">Due This Week</SelectItem>
@@ -299,10 +375,10 @@ export default function GlobalTasksPage() {
           <Button
             variant="outline"
             onClick={() => {
-              setStatusFilter("");
-              setCategoryFilter("");
+              setStatusFilter("all-statuses");
+              setCategoryFilter("all-categories");
               setTagFilter([]);
-              setDueFilter("");
+              setDueFilter("all-due-dates");
             }}
           >
             <Filter className="h-4 w-4 mr-2" />
@@ -328,16 +404,18 @@ export default function GlobalTasksPage() {
             Retry
           </Button>
         </div>
-      ) : tasks.length === 0 ? (
+      ) : filteredTasks.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">No tasks found.</p>
+          <p className="text-gray-600 mb-4">
+            No tasks match your current filters.
+          </p>
           <Button onClick={() => setShowCreateModal(true)}>
             Create Your First Task
           </Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <Card key={task.id} className="card-hover">
               <div className="p-4">
                 <div className="flex items-start justify-between mb-3">

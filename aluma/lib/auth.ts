@@ -256,6 +256,15 @@ export function getNavigationItems(user: User | null) {
     items.push({ label: "Reports", href: "/reports", icon: "FileTextIcon" });
   }
 
+  // Analytics for managers and admins
+  if (permissions.canViewFinancialReports) {
+    items.push({
+      label: "Analytics",
+      href: "/analytics",
+      icon: "BarChart3Icon",
+    });
+  }
+
   if (permissions.canManageUsers) {
     items.push({ label: "Users", href: "/users", icon: "PersonIcon" });
   }
@@ -289,6 +298,8 @@ export function canAccessPage(user: User | null, page: string): boolean {
     case "/invoices":
       return permissions.canManageInvoices;
     case "/reports":
+      return permissions.canViewFinancialReports;
+    case "/analytics":
       return permissions.canViewFinancialReports;
     case "/users":
       return permissions.canManageUsers;

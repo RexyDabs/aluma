@@ -20,7 +20,7 @@ import {
   BellIcon,
   AvatarIcon,
 } from "@radix-ui/react-icons";
-import { Clock, Search } from "lucide-react";
+import { Clock, Search, BarChart3 } from "lucide-react";
 
 interface NavigationItem {
   label: string;
@@ -36,6 +36,7 @@ const iconMap: Record<string, React.ReactNode> = {
   StopwatchIcon: <Clock className="h-5 w-5" />,
   FileTextIcon: <FileTextIcon className="h-5 w-5" />,
   PersonIcon: <PersonIcon className="h-5 w-5" />,
+  BarChart3Icon: <BarChart3 className="h-5 w-5" />,
 };
 
 interface ModernSidebarProps {
