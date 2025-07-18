@@ -249,15 +249,11 @@ export function getNavigationItems(user: User | null) {
   }
 
   if (permissions.canManageInvoices) {
-    items.push({
-      label: "Invoices",
-      href: "/invoices",
-      icon: "CurrencyDollarIcon",
-    });
+    items.push({ label: "Invoices", href: "/invoices", icon: "FileTextIcon" });
   }
 
   if (permissions.canViewFinancialReports) {
-    items.push({ label: "Reports", href: "/reports", icon: "BarChartIcon" });
+    items.push({ label: "Reports", href: "/reports", icon: "FileTextIcon" });
   }
 
   if (permissions.canManageUsers) {
