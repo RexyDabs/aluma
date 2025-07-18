@@ -18,6 +18,7 @@ import {
   ScheduleWidget,
 } from "../../components/DashboardWidgets";
 import QuickTaskForm from "../../components/QuickTaskForm";
+import { Button } from "../../components/ui/button";
 import { Plus, TrendingUp } from "lucide-react";
 import {
   PersonIcon,
