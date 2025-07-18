@@ -308,7 +308,7 @@ export default function DashboardPage() {
         {
           title: "Report Issue",
           description: "Log a problem or delay",
-          icon: <FileText className="h-5 w-5" />,
+          icon: <FileTextIcon className="h-5 w-5" />,
           onClick: () => router.push("/issues"),
           color: "from-orange-500 to-orange-600",
         },
