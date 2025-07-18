@@ -317,7 +317,7 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
           <div className="flex items-center space-x-4">
             {/* Search button */}
             <Button variant="ghost" size="sm" className="hidden md:flex">
-              <MagnifyingGlassIcon className="h-4 w-4 mr-2" />
+              <Search className="h-4 w-4 mr-2" />
               Search
             </Button>
 
