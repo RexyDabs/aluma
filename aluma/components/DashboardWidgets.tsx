@@ -133,7 +133,7 @@ export function ActivityFeed({ activities }: { activities: ActivityItem[] }) {
   const getActivityIcon = (type: string) => {
     switch (type) {
       case "job":
-        return <Wrench className="h-4 w-4" />;
+        return <GearIcon className="h-4 w-4" />;
       case "lead":
         return <Target className="h-4 w-4" />;
       case "task":
