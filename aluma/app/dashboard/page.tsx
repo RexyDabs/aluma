@@ -313,6 +313,13 @@ export default function DashboardPage() {
           color: "from-blue-500 to-blue-600",
         },
         {
+          title: "Quick Task",
+          description: "Create a new task quickly",
+          icon: <Plus className="h-5 w-5" />,
+          onClick: () => setShowQuickTaskModal(true),
+          color: "from-emerald-500 to-emerald-600",
+        },
+        {
           title: "Report Issue",
           description: "Log a problem or delay",
           icon: <FileTextIcon className="h-5 w-5" />,
