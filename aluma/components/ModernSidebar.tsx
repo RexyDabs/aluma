@@ -59,7 +59,7 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
       if (user) {
         const items = getNavigationItems(user).map((item) => ({
           ...item,
-          icon: iconMap[item.icon] || <LayoutDashboard className="h-5 w-5" />,
+          icon: iconMap[item.icon] || <DashboardIcon className="h-5 w-5" />,
         }));
         setNavigationItems(items);
       }
