@@ -36,6 +36,7 @@ const iconMap: Record<string, React.ReactNode> = {
   "🎯": <Target className="h-5 w-5" />,
   "🔧": <Wrench className="h-5 w-5" />,
   "✅": <CheckSquare className="h-5 w-5" />,
+  "⏰": <Clock className="h-5 w-5" />,
   "📋": <FileText className="h-5 w-5" />,
   "💰": <DollarSign className="h-5 w-5" />,
   "📈": <BarChart3 className="h-5 w-5" />,
