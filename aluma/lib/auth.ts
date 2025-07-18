@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
 
 export interface User {
   id: string;
@@ -87,8 +87,11 @@ export const rolePermissions = {
 export async function getCurrentUser(): Promise<User | null> {
   try {
     // Development bypass - check localStorage first
-    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-      const devUser = localStorage.getItem('dev-user');
+    if (
+      typeof window !== "undefined" &&
+      process.env.NODE_ENV === "development"
+    ) {
+      const devUser = localStorage.getItem("dev-user");
       if (devUser) {
         const parsedUser = JSON.parse(devUser);
         return {
@@ -96,25 +99,28 @@ export async function getCurrentUser(): Promise<User | null> {
           auth_user_id: parsedUser.id,
           full_name: parsedUser.full_name,
           email: parsedUser.email,
-          phone: '',
+          phone: "",
           role: parsedUser.role,
           active: true,
-          created_at: new Date().toISOString()
+          created_at: new Date().toISOString(),
         };
       }
     }
 
-    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
-    
+    const {
+      data: { user: authUser },
+      error: authError,
+    } = await supabase.auth.getUser();
+
     if (authError || !authUser) {
       return null;
     }
 
     // Get user details from our users table
     const { data: userData, error: userError } = await supabase
-      .from('users')
-      .select('*')
-      .eq('auth_user_id', authUser.id)
+      .from("users")
+      .select("*")
+      .eq("auth_user_id", authUser.id)
       .single();
 
     if (userError || !userData) {
@@ -123,18 +129,24 @@ export async function getCurrentUser(): Promise<User | null> {
 
     return userData;
   } catch (error) {
-    console.error('Error getting current user:', error);
+    console.error("Error getting current user:", error);
     return null;
   }
 }
 
 // Get user permissions based on role
 export function getUserPermissions(role: string) {
-  return rolePermissions[role as keyof typeof rolePermissions] || rolePermissions.staff;
+  return (
+    rolePermissions[role as keyof typeof rolePermissions] ||
+    rolePermissions.staff
+  );
 }
 
 // Check if user has specific permission
-export function hasPermission(user: User | null, permission: keyof typeof rolePermissions.admin): boolean {
+export function hasPermission(
+  user: User | null,
+  permission: keyof typeof rolePermissions.admin,
+): boolean {
   if (!user || !user.active) return false;
   const permissions = getUserPermissions(user.role);
   return permissions[permission] || false;
@@ -145,9 +157,13 @@ export function getRoleBasedFilters(user: User | null) {
   if (!user || !user.active) return {};
 
   const permissions = getUserPermissions(user.role);
-  
+
   // If user can view all data, return empty filters
-  if (permissions.canViewAllLeads && permissions.canViewAllJobs && permissions.canViewAllTasks) {
+  if (
+    permissions.canViewAllLeads &&
+    permissions.canViewAllJobs &&
+    permissions.canViewAllTasks
+  ) {
     return {};
   }
 
@@ -155,21 +171,27 @@ export function getRoleBasedFilters(user: User | null) {
   return {
     // For leads - only show if user has permission or is assigned
     leads: permissions.canViewAllLeads ? {} : { assigned_to: user.id },
-    
+
     // For jobs - only show assigned jobs for technicians/subcontractors
-    jobs: permissions.canViewAllJobs ? {} : { 
-      'job_assignments.user_id': user.id 
-    },
-    
+    jobs: permissions.canViewAllJobs
+      ? {}
+      : {
+          "job_assignments.user_id": user.id,
+        },
+
     // For tasks - only show assigned tasks for technicians/subcontractors
-    tasks: permissions.canViewAllTasks ? {} : { 
-      assigned_to: user.id 
-    },
-    
+    tasks: permissions.canViewAllTasks
+      ? {}
+      : {
+          assigned_to: user.id,
+        },
+
     // For proposals - only show if user can create/view all
-    proposals: permissions.canCreateProposals ? {} : { 
-      created_by: user.id 
-    },
+    proposals: permissions.canCreateProposals
+      ? {}
+      : {
+          created_by: user.id,
+        },
   };
 }
 
@@ -178,37 +200,46 @@ export function getNavigationItems(user: User | null) {
   if (!user || !user.active) return [];
 
   const permissions = getUserPermissions(user.role);
-  
-  const items = [
-    { label: 'Dashboard', href: '/dashboard', icon: '📊' },
-  ];
 
-  if (permissions.canViewAllLeads || permissions.canViewAllJobs) {
-    items.push({ label: 'Leads', href: '/leads', icon: '🎯' });
-  }
+  const items = [{ label: "Dashboard", href: "/dashboard", icon: "📊" }];
 
-  if (permissions.canViewAllJobs) {
-    items.push({ label: 'Jobs', href: '/jobs', icon: '🔧' });
-  }
+  const isFieldWorker = ["technician", "subcontractor", "staff"].includes(
+    user.role,
+  );
 
-  if (permissions.canViewAllTasks) {
-    items.push({ label: 'Tasks', href: '/global-tasks', icon: '✅' });
+  // Field workers get focused navigation
+  if (isFieldWorker) {
+    items.push({ label: "My Tasks", href: "/global-tasks", icon: "✅" });
+    items.push({ label: "Time Tracking", href: "/time-tracking", icon: "⏰" });
+  } else {
+    // Office workers get management navigation
+    if (permissions.canViewAllLeads) {
+      items.push({ label: "Leads", href: "/leads", icon: "🎯" });
+    }
+
+    if (permissions.canViewAllJobs) {
+      items.push({ label: "Jobs", href: "/jobs", icon: "🔧" });
+    }
+
+    if (permissions.canViewAllTasks) {
+      items.push({ label: "Tasks", href: "/global-tasks", icon: "✅" });
+    }
   }
 
   if (permissions.canCreateProposals) {
-    items.push({ label: 'Proposals', href: '/proposals', icon: '📋' });
+    items.push({ label: "Proposals", href: "/proposals", icon: "📋" });
   }
 
   if (permissions.canManageInvoices) {
-    items.push({ label: 'Invoices', href: '/invoices', icon: '💰' });
+    items.push({ label: "Invoices", href: "/invoices", icon: "💰" });
   }
 
   if (permissions.canViewFinancialReports) {
-    items.push({ label: 'Reports', href: '/reports', icon: '📈' });
+    items.push({ label: "Reports", href: "/reports", icon: "📈" });
   }
 
   if (permissions.canManageUsers) {
-    items.push({ label: 'Users', href: '/users', icon: '👥' });
+    items.push({ label: "Users", href: "/users", icon: "👥" });
   }
 
   return items;
@@ -221,21 +252,21 @@ export function canAccessPage(user: User | null, page: string): boolean {
   const permissions = getUserPermissions(user.role);
 
   switch (page) {
-    case '/dashboard':
+    case "/dashboard":
       return true;
-    case '/leads':
+    case "/leads":
       return permissions.canViewAllLeads;
-    case '/jobs':
+    case "/jobs":
       return permissions.canViewAllJobs;
-    case '/global-tasks':
+    case "/global-tasks":
       return permissions.canViewAllTasks;
-    case '/proposals':
+    case "/proposals":
       return permissions.canCreateProposals;
-    case '/invoices':
+    case "/invoices":
       return permissions.canManageInvoices;
-    case '/reports':
+    case "/reports":
       return permissions.canViewFinancialReports;
-    case '/users':
+    case "/users":
       return permissions.canManageUsers;
     default:
       return false;
@@ -246,17 +277,19 @@ export function canAccessPage(user: User | null, page: string): boolean {
 export async function getUserAssignedJobs(userId: string) {
   try {
     const { data, error } = await supabase
-      .from('job_assignments')
-      .select(`
+      .from("job_assignments")
+      .select(
+        `
         *,
         job:jobs(*)
-      `)
-      .eq('user_id', userId);
+      `,
+      )
+      .eq("user_id", userId);
 
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching user assigned jobs:', error);
+    console.error("Error fetching user assigned jobs:", error);
     return [];
   }
 }
@@ -265,14 +298,14 @@ export async function getUserAssignedJobs(userId: string) {
 export async function getUserAssignedTasks(userId: string) {
   try {
     const { data, error } = await supabase
-      .from('tasks')
-      .select('*')
-      .eq('assigned_to', userId);
+      .from("tasks")
+      .select("*")
+      .eq("assigned_to", userId);
 
     if (error) throw error;
     return data || [];
   } catch (error) {
-    console.error('Error fetching user assigned tasks:', error);
+    console.error("Error fetching user assigned tasks:", error);
     return [];
   }
-} 
+}
