@@ -219,13 +219,13 @@ export function AlertsWidget({
   const getAlertIcon = (type: string) => {
     switch (type) {
       case "warning":
-        return <AlertTriangle className="h-4 w-4" />;
+        return <ExclamationTriangleIcon className="h-4 w-4" />;
       case "error":
-        return <AlertTriangle className="h-4 w-4" />;
+        return <ExclamationTriangleIcon className="h-4 w-4" />;
       case "info":
-        return <Clock className="h-4 w-4" />;
+        return <ClockIcon className="h-4 w-4" />;
       default:
-        return <AlertTriangle className="h-4 w-4" />;
+        return <ExclamationTriangleIcon className="h-4 w-4" />;
     }
   };
 
