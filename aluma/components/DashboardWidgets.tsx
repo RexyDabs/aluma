@@ -141,7 +141,7 @@ export function ActivityFeed({ activities }: { activities: ActivityItem[] }) {
       case "user":
         return <PersonIcon className="h-4 w-4" />;
       default:
-        return <Clock className="h-4 w-4" />;
+        return <ClockIcon className="h-4 w-4" />;
     }
   };
 
