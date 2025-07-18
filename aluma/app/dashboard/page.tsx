@@ -340,7 +340,7 @@ export default function DashboardPage() {
       {
         title: "Add User",
         description: "Invite team member",
-        icon: <UserPlus className="h-5 w-5" />,
+        icon: <PlusCircledIcon className="h-5 w-5" />,
         onClick: () => router.push("/users"),
         color: "from-purple-500 to-purple-600",
       },
