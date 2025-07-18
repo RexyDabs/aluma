@@ -299,7 +299,7 @@ export default function GlobalTasksPage() {
           <Button
             variant="outline"
             onClick={() => {
-              setStatusFilter("");
+              setStatusFilter("all-statuses");
               setCategoryFilter("all-categories");
               setTagFilter([]);
               setDueFilter("all-due-dates");
