@@ -17,6 +17,7 @@ import {
   AlertsWidget,
   ScheduleWidget,
 } from "../../components/DashboardWidgets";
+import QuickTaskForm from "../../components/QuickTaskForm";
 import { Plus, TrendingUp } from "lucide-react";
 import {
   PersonIcon,
@@ -36,6 +37,7 @@ export default function DashboardPage() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userPermissions, setUserPermissions] = useState<any>(null);
   const [dashboardData, setDashboardData] = useState<any>({});
+  const [showQuickTaskModal, setShowQuickTaskModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
