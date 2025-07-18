@@ -274,7 +274,7 @@ export default function GlobalTasksPage() {
               <SelectValue placeholder="Filter by category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all-categories">All Categories</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}
@@ -288,7 +288,7 @@ export default function GlobalTasksPage() {
               <SelectValue placeholder="Filter by due date" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Due Dates</SelectItem>
+              <SelectItem value="all-due-dates">All Due Dates</SelectItem>
               <SelectItem value="overdue">Overdue</SelectItem>
               <SelectItem value="today">Due Today</SelectItem>
               <SelectItem value="this_week">Due This Week</SelectItem>
