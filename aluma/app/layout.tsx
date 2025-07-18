@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import RoleBasedNavigation from "../components/RoleBasedNavigation";
+import ModernSidebar from "../components/ModernSidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} bg-gray-50`}>
-        <RoleBasedNavigation />
-        <main className="min-h-screen pt-16">{children}</main>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} bg-gray-50`}
+      >
+        <ModernSidebar>{children}</ModernSidebar>
       </body>
     </html>
   );
