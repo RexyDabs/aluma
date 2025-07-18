@@ -279,7 +279,7 @@ export function ScheduleWidget({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
-          <Calendar className="h-5 w-5" />
+          <CalendarIcon className="h-5 w-5" />
           <span>Today's Schedule</span>
         </CardTitle>
         <CardDescription>Tasks and appointments for today</CardDescription>
@@ -287,7 +287,7 @@ export function ScheduleWidget({
       <CardContent className="space-y-3">
         {todayTasks.length === 0 ? (
           <div className="text-center py-4 text-gray-500">
-            <Calendar className="h-6 w-6 mx-auto mb-2 opacity-50" />
+            <CalendarIcon className="h-6 w-6 mx-auto mb-2 opacity-50" />
             <p className="text-sm">No tasks scheduled for today</p>
           </div>
         ) : (
