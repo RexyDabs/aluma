@@ -347,7 +347,7 @@ export default function DashboardPage() {
       {
         title: "Generate Report",
         description: "Create performance report",
-        icon: <FileText className="h-5 w-5" />,
+        icon: <FileTextIcon className="h-5 w-5" />,
         onClick: () => router.push("/reports"),
         color: "from-orange-500 to-orange-600",
       },
