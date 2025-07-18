@@ -219,7 +219,7 @@ export default function DashboardPage() {
         {
           title: "Active Jobs",
           value: dashboardData.kpis?.activeJobs || 0,
-          icon: <Wrench className="h-6 w-6" />,
+          icon: <GearIcon className="h-6 w-6" />,
           color: "blue" as const,
           change: { value: 12, type: "increase" as const, period: "this week" },
         },
