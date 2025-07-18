@@ -135,11 +135,11 @@ export function ActivityFeed({ activities }: { activities: ActivityItem[] }) {
       case "job":
         return <GearIcon className="h-4 w-4" />;
       case "lead":
-        return <Target className="h-4 w-4" />;
+        return <TargetIcon className="h-4 w-4" />;
       case "task":
-        return <CheckCircle className="h-4 w-4" />;
+        return <CheckCircledIcon className="h-4 w-4" />;
       case "user":
-        return <Users className="h-4 w-4" />;
+        return <PersonIcon className="h-4 w-4" />;
       default:
         return <Clock className="h-4 w-4" />;
     }
