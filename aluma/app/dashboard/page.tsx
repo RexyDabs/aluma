@@ -17,7 +17,7 @@ import {
   AlertsWidget,
   ScheduleWidget,
 } from "../../components/DashboardWidgets";
-import { Plus } from "lucide-react";
+import { Plus, TrendingUp } from "lucide-react";
 import {
   PersonIcon,
   CheckCircledIcon,
@@ -27,7 +27,6 @@ import {
   GearIcon,
   CalendarIcon,
   FileTextIcon,
-  TriangleUpIcon,
   PlusCircledIcon,
   ClipboardIcon,
 } from "@radix-ui/react-icons";
