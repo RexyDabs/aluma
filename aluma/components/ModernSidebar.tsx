@@ -7,23 +7,23 @@ import { getCurrentUser, getNavigationItems, canAccessPage } from "../lib/auth";
 import type { User } from "../lib/auth";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import { Menu, X } from "lucide-react";
 import {
-  LayoutDashboard,
-  Target,
-  Wrench,
-  CheckSquare,
-  FileText,
-  DollarSign,
-  BarChart3,
-  Users,
-  Menu,
-  X,
-  LogOut,
-  Settings,
-  Bell,
-  Search,
-  User as UserIcon,
-} from "lucide-react";
+  DashboardIcon,
+  TargetIcon,
+  GearIcon,
+  CheckboxIcon,
+  StopwatchIcon,
+  FileTextIcon,
+  CurrencyDollarIcon,
+  BarChartIcon,
+  PersonIcon,
+  ExitIcon,
+  GearIcon as SettingsIcon,
+  BellIcon,
+  MagnifyingGlassIcon,
+  AvatarIcon,
+} from "@radix-ui/react-icons";
 
 interface NavigationItem {
   label: string;
@@ -32,15 +32,15 @@ interface NavigationItem {
 }
 
 const iconMap: Record<string, React.ReactNode> = {
-  "📊": <LayoutDashboard className="h-5 w-5" />,
-  "🎯": <Target className="h-5 w-5" />,
-  "🔧": <Wrench className="h-5 w-5" />,
-  "✅": <CheckSquare className="h-5 w-5" />,
-  "⏰": <Clock className="h-5 w-5" />,
-  "📋": <FileText className="h-5 w-5" />,
-  "💰": <DollarSign className="h-5 w-5" />,
-  "📈": <BarChart3 className="h-5 w-5" />,
-  "👥": <Users className="h-5 w-5" />,
+  DashboardIcon: <DashboardIcon className="h-5 w-5" />,
+  TargetIcon: <TargetIcon className="h-5 w-5" />,
+  GearIcon: <GearIcon className="h-5 w-5" />,
+  CheckboxIcon: <CheckboxIcon className="h-5 w-5" />,
+  StopwatchIcon: <StopwatchIcon className="h-5 w-5" />,
+  FileTextIcon: <FileTextIcon className="h-5 w-5" />,
+  CurrencyDollarIcon: <CurrencyDollarIcon className="h-5 w-5" />,
+  BarChartIcon: <BarChartIcon className="h-5 w-5" />,
+  PersonIcon: <PersonIcon className="h-5 w-5" />,
 };
 
 interface ModernSidebarProps {
