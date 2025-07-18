@@ -268,7 +268,7 @@ export default function DashboardPage() {
       {
         title: "Revenue (MTD)",
         value: "$24,500",
-        icon: <DashboardIcon className="h-6 w-6" />,
+        icon: <PersonIcon className="h-6 w-6" />,
         color: "purple" as const,
         change: {
           value: 22,
