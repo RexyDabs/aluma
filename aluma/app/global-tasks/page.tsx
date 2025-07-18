@@ -89,6 +89,81 @@ export default function GlobalTasksPage() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [editTask, setEditTask] = useState<GlobalTask | null>(null);
 
+  // Filter tasks based on current filter states - moved before early returns to maintain hook order
+  const filteredTasks = useMemo(() => {
+    return tasks.filter((task) => {
+      // Status filter
+      if (
+        statusFilter &&
+        statusFilter !== "all-statuses" &&
+        task.status !== statusFilter
+      ) {
+        return false;
+      }
+
+      // Category filter
+      if (categoryFilter && categoryFilter !== "all-categories") {
+        if (!task.category || task.category.id !== categoryFilter) {
+          return false;
+        }
+      }
+
+      // Due date filter
+      if (dueFilter && dueFilter !== "all-due-dates") {
+        const today = new Date();
+        const taskDueDate = task.due_date ? new Date(task.due_date) : null;
+
+        switch (dueFilter) {
+          case "overdue":
+            if (!taskDueDate || taskDueDate >= today) return false;
+            break;
+          case "today":
+            if (
+              !taskDueDate ||
+              taskDueDate.toDateString() !== today.toDateString()
+            )
+              return false;
+            break;
+          case "this_week":
+            const weekStart = new Date(today);
+            weekStart.setDate(today.getDate() - today.getDay());
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekStart.getDate() + 6);
+            if (
+              !taskDueDate ||
+              taskDueDate < weekStart ||
+              taskDueDate > weekEnd
+            )
+              return false;
+            break;
+          case "next_week":
+            const nextWeekStart = new Date(today);
+            nextWeekStart.setDate(today.getDate() + (7 - today.getDay()));
+            const nextWeekEnd = new Date(nextWeekStart);
+            nextWeekEnd.setDate(nextWeekStart.getDate() + 6);
+            if (
+              !taskDueDate ||
+              taskDueDate < nextWeekStart ||
+              taskDueDate > nextWeekEnd
+            )
+              return false;
+            break;
+        }
+      }
+
+      // Tag filter (if any tags are selected)
+      if (tagFilter.length > 0) {
+        const taskTagIds = task.tags?.map((tag) => tag.id) || [];
+        const hasMatchingTag = tagFilter.some((filterTagId) =>
+          taskTagIds.includes(filterTagId),
+        );
+        if (!hasMatchingTag) return false;
+      }
+
+      return true;
+    });
+  }, [tasks, statusFilter, categoryFilter, dueFilter, tagFilter]);
+
   useEffect(() => {
     async function initializePage() {
       const user = await getCurrentUser();
@@ -192,81 +267,6 @@ export default function GlobalTasksPage() {
   const isFieldWorker = ["technician", "subcontractor", "staff"].includes(
     currentUser.role,
   );
-
-  // Filter tasks based on current filter states
-  const filteredTasks = useMemo(() => {
-    return tasks.filter((task) => {
-      // Status filter
-      if (
-        statusFilter &&
-        statusFilter !== "all-statuses" &&
-        task.status !== statusFilter
-      ) {
-        return false;
-      }
-
-      // Category filter
-      if (categoryFilter && categoryFilter !== "all-categories") {
-        if (!task.category || task.category.id !== categoryFilter) {
-          return false;
-        }
-      }
-
-      // Due date filter
-      if (dueFilter && dueFilter !== "all-due-dates") {
-        const today = new Date();
-        const taskDueDate = task.due_date ? new Date(task.due_date) : null;
-
-        switch (dueFilter) {
-          case "overdue":
-            if (!taskDueDate || taskDueDate >= today) return false;
-            break;
-          case "today":
-            if (
-              !taskDueDate ||
-              taskDueDate.toDateString() !== today.toDateString()
-            )
-              return false;
-            break;
-          case "this_week":
-            const weekStart = new Date(today);
-            weekStart.setDate(today.getDate() - today.getDay());
-            const weekEnd = new Date(weekStart);
-            weekEnd.setDate(weekStart.getDate() + 6);
-            if (
-              !taskDueDate ||
-              taskDueDate < weekStart ||
-              taskDueDate > weekEnd
-            )
-              return false;
-            break;
-          case "next_week":
-            const nextWeekStart = new Date(today);
-            nextWeekStart.setDate(today.getDate() + (7 - today.getDay()));
-            const nextWeekEnd = new Date(nextWeekStart);
-            nextWeekEnd.setDate(nextWeekStart.getDate() + 6);
-            if (
-              !taskDueDate ||
-              taskDueDate < nextWeekStart ||
-              taskDueDate > nextWeekEnd
-            )
-              return false;
-            break;
-        }
-      }
-
-      // Tag filter (if any tags are selected)
-      if (tagFilter.length > 0) {
-        const taskTagIds = task.tags?.map((tag) => tag.id) || [];
-        const hasMatchingTag = tagFilter.some((filterTagId) =>
-          taskTagIds.includes(filterTagId),
-        );
-        if (!hasMatchingTag) return false;
-      }
-
-      return true;
-    });
-  }, [tasks, statusFilter, categoryFilter, dueFilter, tagFilter]);
 
   // Mobile view for field workers
   if (viewMode === "mobile" || isFieldWorker) {
