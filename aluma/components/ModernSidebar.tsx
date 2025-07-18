@@ -15,8 +15,6 @@ import {
   CheckboxIcon,
   StopwatchIcon,
   FileTextIcon,
-  CurrencyDollarIcon,
-  BarChartIcon,
   PersonIcon,
   ExitIcon,
   GearIcon as SettingsIcon,
