@@ -241,7 +241,7 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
                   size="sm"
                   className="w-full justify-start text-gray-600 hover:text-gray-900"
                 >
-                  <Settings className="h-4 w-4 mr-3" />
+                  <SettingsIcon className="h-4 w-4 mr-3" />
                   Settings
                 </Button>
                 <Button
@@ -256,7 +256,7 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
                     window.location.href = "/";
                   }}
                 >
-                  <LogOut className="h-4 w-4 mr-3" />
+                  <ExitIcon className="h-4 w-4 mr-3" />
                   Sign Out
                 </Button>
               </>
@@ -270,7 +270,7 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
                   className="w-full p-2 justify-center"
                   title="Settings"
                 >
-                  <Settings className="h-4 w-4" />
+                  <SettingsIcon className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="ghost"
@@ -285,7 +285,7 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
                     window.location.href = "/";
                   }}
                 >
-                  <LogOut className="h-4 w-4" />
+                  <ExitIcon className="h-4 w-4" />
                 </Button>
               </div>
             )}
