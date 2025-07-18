@@ -243,7 +243,7 @@ export default function DashboardPage() {
         {
           title: "Completion Rate",
           value: "94%",
-          icon: <TriangleUpIcon className="h-6 w-6" />,
+          icon: <TrendingUp className="h-6 w-6" />,
           color: "orange" as const,
           change: { value: 2, type: "increase" as const, period: "this month" },
         },
