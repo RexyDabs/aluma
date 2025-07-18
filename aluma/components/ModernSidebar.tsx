@@ -36,8 +36,6 @@ const iconMap: Record<string, React.ReactNode> = {
   CheckboxIcon: <CheckboxIcon className="h-5 w-5" />,
   StopwatchIcon: <StopwatchIcon className="h-5 w-5" />,
   FileTextIcon: <FileTextIcon className="h-5 w-5" />,
-  CurrencyDollarIcon: <CurrencyDollarIcon className="h-5 w-5" />,
-  BarChartIcon: <BarChartIcon className="h-5 w-5" />,
   PersonIcon: <PersonIcon className="h-5 w-5" />,
 };
 
