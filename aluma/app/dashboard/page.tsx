@@ -437,6 +437,13 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
+
+      {/* Quick Task Creation Modal */}
+      <QuickTaskForm
+        isOpen={showQuickTaskModal}
+        onClose={() => setShowQuickTaskModal(false)}
+        onTaskCreated={handleTaskCreated}
+      />
     </div>
   );
 }
