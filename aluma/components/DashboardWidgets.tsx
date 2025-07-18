@@ -15,7 +15,7 @@ import {
   PersonIcon,
   CheckCircledIcon,
   ClockIcon,
-  DollarSignIcon,
+  DashboardIcon,
   TargetIcon,
   GearIcon,
   ExclamationTriangleIcon,
