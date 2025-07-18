@@ -251,15 +251,21 @@ export function canAccessPage(user: User | null, page: string): boolean {
 
   const permissions = getUserPermissions(user.role);
 
+  const isFieldWorker = ["technician", "subcontractor", "staff"].includes(
+    user.role,
+  );
+
   switch (page) {
     case "/dashboard":
       return true;
+    case "/time-tracking":
+      return isFieldWorker; // Only field workers can access time tracking
+    case "/global-tasks":
+      return permissions.canViewAllTasks || isFieldWorker; // Field workers can see their tasks
     case "/leads":
       return permissions.canViewAllLeads;
     case "/jobs":
       return permissions.canViewAllJobs;
-    case "/global-tasks":
-      return permissions.canViewAllTasks;
     case "/proposals":
       return permissions.canCreateProposals;
     case "/invoices":
