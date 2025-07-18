@@ -315,7 +315,7 @@ export default function DashboardPage() {
         {
           title: "Job Details",
           description: "View current job info",
-          icon: <Wrench className="h-5 w-5" />,
+          icon: <GearIcon className="h-5 w-5" />,
           onClick: () => router.push("/jobs"),
           color: "from-purple-500 to-purple-600",
         },
