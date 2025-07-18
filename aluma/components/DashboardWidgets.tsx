@@ -15,12 +15,10 @@ import {
   PersonIcon,
   CheckCircledIcon,
   ClockIcon,
-  DashboardIcon,
   TargetIcon,
   GearIcon,
   ExclamationTriangleIcon,
   CalendarIcon,
-  ActivityLogIcon,
 } from "@radix-ui/react-icons";
 
 interface KPICardProps {
