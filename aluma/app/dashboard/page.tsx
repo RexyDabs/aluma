@@ -294,7 +294,7 @@ export default function DashboardPage() {
         {
           title: "Check In",
           description: "Start your workday",
-          icon: <Clock className="h-5 w-5" />,
+          icon: <ClockIcon className="h-5 w-5" />,
           onClick: () => router.push("/time-tracking"),
           color: "from-green-500 to-green-600",
         },
