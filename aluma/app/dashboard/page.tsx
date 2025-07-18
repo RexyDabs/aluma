@@ -333,7 +333,7 @@ export default function DashboardPage() {
       {
         title: "Create Job",
         description: "Start a new project",
-        icon: <Wrench className="h-5 w-5" />,
+        icon: <GearIcon className="h-5 w-5" />,
         onClick: () => router.push("/jobs"),
         color: "from-green-500 to-green-600",
       },
