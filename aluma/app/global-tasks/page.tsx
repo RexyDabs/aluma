@@ -403,16 +403,18 @@ export default function GlobalTasksPage() {
             Retry
           </Button>
         </div>
-      ) : tasks.length === 0 ? (
+      ) : filteredTasks.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">No tasks found.</p>
+          <p className="text-gray-600 mb-4">
+            No tasks match your current filters.
+          </p>
           <Button onClick={() => setShowCreateModal(true)}>
             Create Your First Task
           </Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <Card key={task.id} className="card-hover">
               <div className="p-4">
                 <div className="flex items-start justify-between mb-3">
