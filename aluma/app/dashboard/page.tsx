@@ -255,21 +255,21 @@ export default function DashboardPage() {
       {
         title: "Total Leads",
         value: dashboardData.kpis?.totalLeads || 0,
-        icon: <Target className="h-6 w-6" />,
+        icon: <TargetIcon className="h-6 w-6" />,
         color: "blue" as const,
         change: { value: 15, type: "increase" as const, period: "this month" },
       },
       {
         title: "Active Jobs",
         value: dashboardData.kpis?.activeJobs || 0,
-        icon: <Wrench className="h-6 w-6" />,
+        icon: <GearIcon className="h-6 w-6" />,
         color: "green" as const,
         change: { value: 8, type: "increase" as const, period: "this week" },
       },
       {
         title: "Revenue (MTD)",
         value: "$24,500",
-        icon: <DollarSign className="h-6 w-6" />,
+        icon: <DollarSignIcon className="h-6 w-6" />,
         color: "purple" as const,
         change: {
           value: 22,
@@ -280,7 +280,7 @@ export default function DashboardPage() {
       {
         title: "Team Members",
         value: 12,
-        icon: <Users className="h-6 w-6" />,
+        icon: <PersonIcon className="h-6 w-6" />,
         color: "orange" as const,
         change: { value: 2, type: "increase" as const, period: "new hires" },
       },
