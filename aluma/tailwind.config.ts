@@ -48,6 +48,11 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      boxShadow: {
+        soft: "0 2px 8px rgba(0, 0, 0, 0.06)",
+        medium: "0 4px 16px rgba(0, 0, 0, 0.08)",
+        strong: "0 8px 32px rgba(0, 0, 0, 0.12)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
