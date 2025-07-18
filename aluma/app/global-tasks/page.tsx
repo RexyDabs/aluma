@@ -300,9 +300,9 @@ export default function GlobalTasksPage() {
             variant="outline"
             onClick={() => {
               setStatusFilter("");
-              setCategoryFilter("");
+              setCategoryFilter("all-categories");
               setTagFilter([]);
-              setDueFilter("");
+              setDueFilter("all-due-dates");
             }}
           >
             <Filter className="h-4 w-4 mr-2" />
