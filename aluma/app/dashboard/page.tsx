@@ -226,7 +226,7 @@ export default function DashboardPage() {
         {
           title: "Tasks Today",
           value: dashboardData.schedule?.length || 0,
-          icon: <CheckCircle className="h-6 w-6" />,
+          icon: <CheckCircledIcon className="h-6 w-6" />,
           color: "green" as const,
           change: {
             value: 8,
@@ -237,14 +237,14 @@ export default function DashboardPage() {
         {
           title: "Hours Logged",
           value: "32.5",
-          icon: <Clock className="h-6 w-6" />,
+          icon: <ClockIcon className="h-6 w-6" />,
           color: "purple" as const,
           change: { value: 5, type: "increase" as const, period: "this week" },
         },
         {
           title: "Completion Rate",
           value: "94%",
-          icon: <TrendingUp className="h-6 w-6" />,
+          icon: <TrendingUpIcon className="h-6 w-6" />,
           color: "orange" as const,
           change: { value: 2, type: "increase" as const, period: "this month" },
         },
