@@ -301,7 +301,7 @@ export default function DashboardPage() {
         {
           title: "View Tasks",
           description: "See today's assignments",
-          icon: <ClipboardList className="h-5 w-5" />,
+          icon: <ClipboardIcon className="h-5 w-5" />,
           onClick: () => router.push("/global-tasks"),
           color: "from-blue-500 to-blue-600",
         },
