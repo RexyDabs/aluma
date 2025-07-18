@@ -59,6 +59,12 @@ export default function DashboardPage() {
     initializeDashboard();
   }, []);
 
+  function handleTaskCreated(taskId: string) {
+    // Optionally refresh dashboard data or show success message
+    console.log("Task created with ID:", taskId);
+    // Could add a toast notification here
+  }
+
   async function fetchDashboardData(user: User, permissions: any) {
     try {
       const data: any = {
