@@ -10,18 +10,18 @@ import {
 } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import { TrendingUp, TrendingDown } from "lucide-react";
 import {
-  TrendingUp,
-  TrendingDown,
-  Users,
-  CheckCircle,
-  Clock,
-  DollarSign,
-  Target,
-  Wrench,
-  AlertTriangle,
-  Calendar,
-} from "lucide-react";
+  PersonIcon,
+  CheckCircledIcon,
+  ClockIcon,
+  DollarSignIcon,
+  TargetIcon,
+  GearIcon,
+  ExclamationTriangleIcon,
+  CalendarIcon,
+  ActivityLogIcon,
+} from "@radix-ui/react-icons";
 
 interface KPICardProps {
   title: string;
