@@ -201,7 +201,9 @@ export function getNavigationItems(user: User | null) {
 
   const permissions = getUserPermissions(user.role);
 
-  const items = [{ label: "Dashboard", href: "/dashboard", icon: "📊" }];
+  const items = [
+    { label: "Dashboard", href: "/dashboard", icon: "DashboardIcon" },
+  ];
 
   const isFieldWorker = ["technician", "subcontractor", "staff"].includes(
     user.role,
@@ -209,25 +211,41 @@ export function getNavigationItems(user: User | null) {
 
   // Field workers get focused navigation
   if (isFieldWorker) {
-    items.push({ label: "My Tasks", href: "/global-tasks", icon: "✅" });
-    items.push({ label: "Time Tracking", href: "/time-tracking", icon: "⏰" });
+    items.push({
+      label: "My Tasks",
+      href: "/global-tasks",
+      icon: "CheckboxIcon",
+    });
+    items.push({
+      label: "Time Tracking",
+      href: "/time-tracking",
+      icon: "StopwatchIcon",
+    });
   } else {
     // Office workers get management navigation
     if (permissions.canViewAllLeads) {
-      items.push({ label: "Leads", href: "/leads", icon: "🎯" });
+      items.push({ label: "Leads", href: "/leads", icon: "TargetIcon" });
     }
 
     if (permissions.canViewAllJobs) {
-      items.push({ label: "Jobs", href: "/jobs", icon: "🔧" });
+      items.push({ label: "Jobs", href: "/jobs", icon: "GearIcon" });
     }
 
     if (permissions.canViewAllTasks) {
-      items.push({ label: "Tasks", href: "/global-tasks", icon: "✅" });
+      items.push({
+        label: "Tasks",
+        href: "/global-tasks",
+        icon: "CheckboxIcon",
+      });
     }
   }
 
   if (permissions.canCreateProposals) {
-    items.push({ label: "Proposals", href: "/proposals", icon: "📋" });
+    items.push({
+      label: "Proposals",
+      href: "/proposals",
+      icon: "FileTextIcon",
+    });
   }
 
   if (permissions.canManageInvoices) {
