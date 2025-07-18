@@ -33,7 +33,7 @@ const iconMap: Record<string, React.ReactNode> = {
   TargetIcon: <TargetIcon className="h-5 w-5" />,
   GearIcon: <GearIcon className="h-5 w-5" />,
   CheckboxIcon: <CheckboxIcon className="h-5 w-5" />,
-  StopwatchIcon: <StopwatchIcon className="h-5 w-5" />,
+  StopwatchIcon: <Clock className="h-5 w-5" />,
   FileTextIcon: <FileTextIcon className="h-5 w-5" />,
   PersonIcon: <PersonIcon className="h-5 w-5" />,
 };
