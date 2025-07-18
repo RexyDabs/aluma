@@ -64,7 +64,7 @@ interface TaskTag {
 }
 
 const statusOptions = [
-  { label: "All", value: "" },
+  { label: "All", value: "all-statuses" },
   { label: "To Do", value: "todo" },
   { label: "In Progress", value: "in_progress" },
   { label: "Done", value: "done" },
@@ -79,7 +79,7 @@ export default function GlobalTasksPage() {
   const [categories, setCategories] = useState<TaskCategory[]>([]);
   const [tags, setTags] = useState<TaskTag[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all-statuses");
   const [categoryFilter, setCategoryFilter] = useState("all-categories");
   const [tagFilter, setTagFilter] = useState<string[]>([]);
   const [dueFilter, setDueFilter] = useState("all-due-dates");
