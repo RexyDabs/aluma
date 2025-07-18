@@ -171,7 +171,7 @@ export function ActivityFeed({ activities }: { activities: ActivityItem[] }) {
       <CardContent className="space-y-4">
         {activities.length === 0 ? (
           <div className="text-center py-8 text-gray-500">
-            <Clock className="h-8 w-8 mx-auto mb-2 opacity-50" />
+            <ClockIcon className="h-8 w-8 mx-auto mb-2 opacity-50" />
             <p>No recent activity</p>
           </div>
         ) : (
