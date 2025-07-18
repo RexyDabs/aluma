@@ -80,9 +80,9 @@ export default function GlobalTasksPage() {
   const [tags, setTags] = useState<TaskTag[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all-categories");
   const [tagFilter, setTagFilter] = useState<string[]>([]);
-  const [dueFilter, setDueFilter] = useState("");
+  const [dueFilter, setDueFilter] = useState("all-due-dates");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showQuickCreateModal, setShowQuickCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
