@@ -135,18 +135,11 @@ function getDateRange(range: string) {
 }
 
 export default function DashboardPage() {
-  const [leads, setLeads] = useState<Lead[]>([]);
-  const [statusLogs, setStatusLogs] = useState<LeadStatusLog[]>([]);
-  const [contacts, setContacts] = useState<LeadContact[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [statusFilter, setStatusFilter] = useState<string>("");
-  const [viewType, setViewType] = useState<string>("table");
-  const [dateRange, setDateRange] = useState<string>("this_month");
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userPermissions, setUserPermissions] = useState<any>(null);
-  const [assignedJobs, setAssignedJobs] = useState<any[]>([]);
-  const [assignedTasks, setAssignedTasks] = useState<any[]>([]);
+  const [dashboardData, setDashboardData] = useState<any>({});
+  const router = useRouter();
 
   useEffect(() => {
     async function initializeUser() {
