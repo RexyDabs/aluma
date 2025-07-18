@@ -249,15 +249,19 @@ export function getNavigationItems(user: User | null) {
   }
 
   if (permissions.canManageInvoices) {
-    items.push({ label: "Invoices", href: "/invoices", icon: "💰" });
+    items.push({
+      label: "Invoices",
+      href: "/invoices",
+      icon: "CurrencyDollarIcon",
+    });
   }
 
   if (permissions.canViewFinancialReports) {
-    items.push({ label: "Reports", href: "/reports", icon: "📈" });
+    items.push({ label: "Reports", href: "/reports", icon: "BarChartIcon" });
   }
 
   if (permissions.canManageUsers) {
-    items.push({ label: "Users", href: "/users", icon: "👥" });
+    items.push({ label: "Users", href: "/users", icon: "PersonIcon" });
   }
 
   return items;
