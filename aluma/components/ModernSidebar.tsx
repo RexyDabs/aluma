@@ -322,13 +322,13 @@ export default function ModernSidebar({ children }: ModernSidebarProps) {
           <div className="flex items-center space-x-4">
             {/* Search button */}
             <Button variant="ghost" size="sm" className="hidden md:flex">
-              <Search className="h-4 w-4 mr-2" />
+              <MagnifyingGlassIcon className="h-4 w-4 mr-2" />
               Search
             </Button>
 
             {/* Notifications */}
             <Button variant="ghost" size="sm" className="relative">
-              <Bell className="h-4 w-4" />
+              <BellIcon className="h-4 w-4" />
               <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full text-xs"></span>
             </Button>
 
